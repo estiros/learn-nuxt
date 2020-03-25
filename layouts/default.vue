@@ -1,5 +1,28 @@
 <template>
   <div>
+    <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar-brand href="/">Home</b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item href="/album">Album</b-nav-item>
+        </b-navbar-nav>
+        <!-- right navbar item -->
+        <b-navbar-nav class="ml-auto">
+          <router-link class="ml-2" to="/login">
+            <b-button variant="success">Login</b-button>
+          </router-link>
+          <router-link class="ml-2" to="/register">
+            <b-button variant="danger">Register</b-button>
+          </router-link>
+
+          <p>User Email</p>
+          <b-nav-item href="/album">Logout</b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
     <nuxt />
   </div>
 </template>

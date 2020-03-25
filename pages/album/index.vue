@@ -3,10 +3,10 @@
     <center>
       <h1 class="mb-5 mt-3">Ini Album</h1>
     </center>
-    <div class="row">
+    <div class="row mb-2">
       <div class="col-md-6">
         <router-link to="/album/create">
-          <b-button variant="warning" class="mb-3">Create</b-button>
+          <b-button variant="warning">Create</b-button>
         </router-link>
       </div>
       <div class="col-md-4">
@@ -19,6 +19,11 @@
       </div>
       <div class="col-md-2">
         <!-- Buat Filter -->
+        <b-dropdown id="dropdown-1" text="Filter by UserID" variant="primary">
+          <b-dropdown-item v-for="n in 10" :key="n" @click="filter(n)"
+            >UserID {{ n }}</b-dropdown-item
+          >
+        </b-dropdown>
       </div>
     </div>
 
@@ -76,6 +81,10 @@ export default {
     },
     async search() {
       const res = await this.$axios.get(`albums?q=${this.textSearch}`)
+      this.albums = res.data
+    },
+    async filter(n) {
+      const res = await this.$axios.get(`albums?userId=${n}`)
       this.albums = res.data
     }
   }
