@@ -78,6 +78,11 @@ export default {
   router: {
     middleware: ['auth']
   },
+  pwa: {
+    workbox: {
+      /* workbox options */
+    }
+  },
   /*
    ** Build configuration
    */
