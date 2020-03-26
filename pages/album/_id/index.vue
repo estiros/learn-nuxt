@@ -9,6 +9,7 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -26,7 +27,9 @@ export default {
       this.id = this.$route.params.id
     },
     async getData() {
-      const res = await this.$axios.get('albums/' + this.$route.params.id)
+      const res = await axios.get(
+        'http://localhost:3001/albums/' + this.$route.params.id
+      )
       this.data = res.data
     }
     // getData() {

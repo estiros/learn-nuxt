@@ -10,16 +10,22 @@
           <b-nav-item href="/album">Album</b-nav-item>
         </b-navbar-nav>
         <!-- right navbar item -->
-        <b-navbar-nav class="ml-auto">
+        <!-- jika belum login -->
+        <b-navbar-nav v-if="!this.$auth.loggedIn" class="ml-auto">
           <router-link class="ml-2" to="/login">
             <b-button variant="success">Login</b-button>
           </router-link>
           <router-link class="ml-2" to="/register">
             <b-button variant="danger">Register</b-button>
           </router-link>
+        </b-navbar-nav>
 
-          <p>User Email</p>
-          <b-nav-item href="/album">Logout</b-nav-item>
+        <!-- jika sudah login -->
+        <b-navbar-nav v-else class="ml-auto">
+          <div class="ml-2 mt-2">{{ this.$auth.user.email }}</div>
+          <b-button class="ml-2" variant="danger" @click="$auth.logout()"
+            >Logout</b-button
+          >
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -27,6 +33,15 @@
   </div>
 </template>
 
+<script>
+export default {
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+    }
+  }
+}
+</script>
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',

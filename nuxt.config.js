@@ -45,10 +45,38 @@ export default {
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/auth'
   ],
   axios: {
-    baseURL: 'http://localhost:3001/'
+    baseURL: 'https://reqres.in/'
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/api/login',
+            method: 'post',
+            propertyName: 'token'
+          },
+          logout: { url: '/api/logout', method: 'post' },
+          user: { url: '/api/users/2', method: 'get', propertyName: 'data' }
+        }
+        // tokenRequired: true,
+        // tokenType: 'bearer'
+        // autoFetchUser: true
+      }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      callback: '/login',
+      home: '/album'
+    }
+  },
+  router: {
+    middleware: ['auth']
   },
   /*
    ** Build configuration

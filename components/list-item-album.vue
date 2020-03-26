@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   // eslint-disable-next-line vue/require-prop-types
   props: ['album'],
@@ -52,7 +53,7 @@ export default {
       // eslint-disable-next-line no-use-before-define
       const setuju = confirm('Are you sure want to delete this data?')
       if (setuju) {
-        await this.$axios.delete('albums/' + this.album.id)
+        await axios.delete('http://localhost:3001/albums/' + this.album.id)
         // await this.$axios.delete(`albums/${this.album.id}`)
         this.$emit('refresh-table')
       } else {

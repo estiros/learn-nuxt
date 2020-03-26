@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -40,8 +41,8 @@ export default {
   methods: {
     simpan(evt) {
       evt.preventDefault()
-      this.$axios
-        .post('albums', {
+      axios
+        .post('http://localhost:3001/albums', {
           userId: this.user_id,
           title: this.judul // yg di api : v-model
         })

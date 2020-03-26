@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -42,7 +43,9 @@ export default {
   },
   methods: {
     async getData() {
-      const res = await this.$axios.get(`albums/${this.$route.params.id}`)
+      const res = await axios.get(
+        `http://localhost:3001/albums/${this.$route.params.id}`
+      )
       // eslint-disable-next-line no-console
       console.log(res)
       this.user_id = res.data.userId
@@ -50,8 +53,8 @@ export default {
     },
     simpan(evt) {
       evt.preventDefault()
-      this.$axios
-        .patch(`albums/${this.$route.params.id}`, {
+      axios
+        .patch(`http://localhost:3001/albums/${this.$route.params.id}`, {
           userId: this.user_id,
           title: this.judul // yg di api : v-model
         })

@@ -53,6 +53,7 @@
 
 <script>
 // import axios from 'axios'
+import axios from 'axios'
 import ListItemAlbum from '../../components/list-item-album'
 
 export default {
@@ -68,8 +69,8 @@ export default {
   },
   methods: {
     getData() {
-      this.$axios
-        .get('albums')
+      axios
+        .get('http://localhost:3001/albums')
         .then((res) => {
           this.albums = res.data
           // console.log(res)
@@ -80,11 +81,13 @@ export default {
         })
     },
     async search() {
-      const res = await this.$axios.get(`albums?q=${this.textSearch}`)
+      const res = await axios.get(
+        `http://localhost:3001/albums?q=${this.textSearch}`
+      )
       this.albums = res.data
     },
     async filter(n) {
-      const res = await this.$axios.get(`albums?userId=${n}`)
+      const res = await axios.get(`http://localhost:3001/albums?userId=${n}`)
       this.albums = res.data
     }
   }
